@@ -1,16 +1,25 @@
 author:         Jan Matějka
+category:       System
+license-file:   LICENSE
 build-type:     Simple
 cabal-version:  >= 1.16
 copyright:      2014 Jan Matějka <yac@blesmrt.net>
 license:        BSD3
 maintainer:     <yac@blesmrt.net>
+homepage:       https://github.com/yaccz/os-release
 name:           os-release
 synopsis:       /etc/os-release helpers
 version:        0.1.0
+description:    /etc/os-release helpers
+
+
+source-repository head
+  type:     git
+  location: https://github.com/yaccz/os-release.git
 
 library
     build-depends:
-      base
+      base < 5
     default-language:   Haskell2010
     exposed-modules:    System.OsRelease
     ghc-options:
@@ -22,7 +31,7 @@ library
 
 test-suite tests
     build-depends:
-        base
+        base < 5
       , os-release
       , hspec
     default-language:
@@ -43,7 +52,7 @@ test-suite tests
 
 test-suite documentation
     build-depends:
-        base
+        base < 5
       , process == 1.*
       , regex-compat == 0.*
     default-language:
@@ -57,7 +66,7 @@ test-suite documentation
 
 test-suite style
     build-depends:
-        base
+        base < 5
       , hlint == 1.*
     default-language:
         Haskell2010
