@@ -1,0 +1,6 @@
+os:
+    - OpenSUSE-13.1
+    - Sles-11-sp3
+
+os_upload_target: /root/.config/os-release/acceptance
+os_upload_source: ./tests/acceptance/.config
