@@ -19,7 +19,10 @@ source-repository head
 
 library
     build-depends:
-      base < 5
+        base < 5
+      , parsec
+      , containers
+      , parsec
     default-language:   Haskell2010
     exposed-modules:    System.OsRelease
     ghc-options:
@@ -34,6 +37,7 @@ test-suite tests
         base < 5
       , os-release
       , hspec
+      , parsec
     default-language:
         Haskell2010
     ghc-options:
