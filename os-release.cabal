@@ -80,25 +80,3 @@ test-suite style
         HLint.hs
     type:
         exitcode-stdio-1.0
-
-test-suite acceptance
-    build-depends:
-        base < 5
-      , os-release
-      , process
-      , hspec
-      , xdg-basedir
-      , filepath
-    default-language:
-        Haskell2010
-    ghc-options:
-        -Wall
-    hs-source-dirs:
-        library
-        tests/acceptance
-    main-is:
-        Spec.hs
-    other-modules:
-        System.OsRelease
-    type:
-        exitcode-stdio-1.0
