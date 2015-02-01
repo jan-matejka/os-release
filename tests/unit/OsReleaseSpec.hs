@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module OsReleaseSpec (spec) where
 
 import           Test.Hspec
@@ -28,5 +29,5 @@ spec = do
 
         errCase x =
             case parseOs x of
-                Left  _ -> "1" `shouldBe` "1"
+                Left  _ -> ("1"::String) `shouldBe` "1"
                 Right z -> expectationFailure (show z)

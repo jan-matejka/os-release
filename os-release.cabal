@@ -24,6 +24,7 @@ library
       , containers
       , parsec
       , containers
+      , transformers
     default-language:   Haskell2010
     exposed-modules:    System.OsRelease
     ghc-options:
@@ -40,6 +41,7 @@ test-suite tests
       , hspec
       , parsec
       , containers
+      , transformers
     default-language:
         Haskell2010
     ghc-options:
