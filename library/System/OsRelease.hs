@@ -8,13 +8,13 @@ module System.OsRelease
 where
 
 import Text.ParserCombinators.Parsec
--- import Data.Map
+import Data.Map.Lazy
+import Control.Applicative ((<$>))
 
 data OsRelease = OpenSUSE
     deriving (Eq, Show)
 
--- type OsReleaseRaw = Map String String
-type OsReleaseRaw = [(String, String)]
+type OsReleaseRaw = Map String String
 
 osReleaseParser :: Parser [(String, String)]
 osReleaseParser = sepEndBy line eol
@@ -51,7 +51,7 @@ readOs = do
     return $ parseOs xs
 
 parseOs :: String -> Either ParseError OsReleaseRaw
-parseOs xs = parse osReleaseParser "os-release" xs
+parseOs xs = fromList <$> parse osReleaseParser "os-release" xs
 
 detect :: IO (Maybe OsRelease)
 detect = do

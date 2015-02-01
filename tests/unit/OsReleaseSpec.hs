@@ -2,6 +2,7 @@ module OsReleaseSpec (spec) where
 
 import           Test.Hspec
 import           System.OsRelease
+import           Data.Map.Lazy
 
 spec :: Spec
 spec = do
@@ -30,7 +31,7 @@ spec = do
         parseCase x y =
             case parseOs x of
                 Left  e -> expectationFailure $ show e
-                Right z -> z `shouldBe` y
+                Right z -> z `shouldBe` (fromList y)
 
         errCase x =
             case parseOs x of

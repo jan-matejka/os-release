@@ -23,6 +23,7 @@ library
       , parsec
       , containers
       , parsec
+      , containers
     default-language:   Haskell2010
     exposed-modules:    System.OsRelease
     ghc-options:
@@ -38,6 +39,7 @@ test-suite tests
       , os-release
       , hspec
       , parsec
+      , containers
     default-language:
         Haskell2010
     ghc-options:
