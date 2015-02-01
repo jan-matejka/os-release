@@ -45,14 +45,16 @@ spec = do
         it "breaks on unquoted val with ;"      $ errCase "foo=ba;r"
         it "breaks on unquoted val with \\"     $ errCase "foo=ba\\r"
 
-        it "parses Gentoo os-release" $
-            parseCase (input Gentoo) (output Gentoo)
+        it "parses Gentoo os-release"           $ realCase Gentoo
+        it "parses OpenSUSE Factory os-release" $ realCase OpenSUSEFactory
 
     where
         fooBar x = parseCase x [("foo", "bar")]
 
         specialFooBar :: String -> String -> Expectation
         specialFooBar x y = parseCase x [("foo", OsReleaseValue $ "ba" <> y <> "r")]
+
+        realCase x = parseCase (input x) (output x)
 
         parseCase x y =
             case parseOs x of
