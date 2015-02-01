@@ -11,11 +11,13 @@ module System.OsRelease
 where
 
 import Text.ParserCombinators.Parsec
-import Text.Parsec.Prim
-import Data.Map.Lazy
+import Text.Parsec.Prim hiding (try)
+import Data.Map.Lazy hiding (foldl)
 import Data.Functor.Identity
 import Data.String
+import Data.Monoid
 import Control.Applicative ((<$>))
+import Control.Monad
 
 type OsReleaseLine  = (OsReleaseKey, OsReleaseValue)
 newtype OsReleaseKey   = OsReleaseKey String
@@ -38,12 +40,32 @@ instance Parsable OsReleaseValue where
         qVal :: Parser String
         qVal  = do
             quote <- oneOf "'\""
-            value <- nqVal
-            _ <- char quote
-            return value
+            value <- manyTill (qValInside quote) (char quote)
+            noJunk
+            return (foldl mappend "" value)
+
+        noJunk = try . lookAhead $ eof <|> (void newline)
+
+        qValInside :: Char -> ParsecT String () Identity String
+        qValInside quote = (qSpecial quote) <|> (:[]) <$> alphaNum
+
+        qSpecial :: Char -> ParsecT String () Identity String
+        qSpecial quote = (\x -> [x!!1]) <$>
+            foldl1 (<|>) [try (string $ "\\" <> [x]) | x <- specials quote]
+
+        specials :: Char -> [Char]
+        specials quote =
+            [ quote
+            , '\\'
+            , '$'
+            , '`'
+            ]
 
         nqVal :: Parser String
-        nqVal = many1 alphaNum
+        nqVal = do
+            x <- many alphaNum
+            noJunk
+            return x
 
 instance Parsable OsReleaseLine where
     parser = do
@@ -53,7 +75,7 @@ instance Parsable OsReleaseLine where
         return (var, val)
 
 instance Parsable OsRelease where
-    parser = fromList <$> (sepEndBy (parser :: ParsecT String () Identity OsReleaseLine) $ char '\n')
+    parser = fromList <$> (sepEndBy (parser :: ParsecT String () Identity OsReleaseLine) newline)
 
 
 readOs :: IO (Either ParseError OsRelease)
