@@ -49,6 +49,7 @@ spec = do
 
         it "parses Gentoo os-release"           $ realCase Gentoo
         it "parses OpenSUSE Factory os-release" $ realCase OpenSUSEFactory
+        it "parses Arch os-release"             $ realCase Arch
 
     describe "readOs'" $ do
         it "reads 1st" $ do
