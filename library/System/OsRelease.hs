@@ -1,8 +1,5 @@
 module System.OsRelease
-    ( detect
-    , OsRelease (..)
-    , detect'
-    , parseOs
+    ( parseOs
     , readOs
     )
 where
@@ -10,9 +7,6 @@ where
 import Text.ParserCombinators.Parsec
 import Data.Map.Lazy
 import Control.Applicative ((<$>))
-
-data OsRelease = OpenSUSE
-    deriving (Eq, Show)
 
 type OsReleaseRaw = Map String String
 
@@ -52,13 +46,3 @@ readOs = do
 
 parseOs :: String -> Either ParseError OsReleaseRaw
 parseOs xs = fromList <$> parse osReleaseParser "os-release" xs
-
-detect :: IO (Maybe OsRelease)
-detect = do
-    osr <- readFile "/etc/os-release"
-    return . detect' $ lines osr
-
-detect' :: [String] -> Maybe OsRelease
-detect' [] = Nothing
-detect' ("NAME=openSUSE":_) = Just OpenSUSE
-detect' (_:xs) = detect' xs

@@ -6,13 +6,6 @@ import           Data.Map.Lazy
 
 spec :: Spec
 spec = do
-    describe "detect" $ do
-        it "parses" $ do
-            detect' ["NAME=openSUSE"]      `shouldBe` Just OpenSUSE
-            detect' []                     `shouldBe` Nothing
-            detect' ["NAME=open"]          `shouldBe` Nothing
-            detect' ["NAME=\"openSUSE\""]  `shouldBe` Nothing
-
     describe "parseOs" $ do
         it "parses simple value"                   $ fooBar "foo=bar"
         it "parses simple value with trailing NL"  $ fooBar "foo=bar\n"
