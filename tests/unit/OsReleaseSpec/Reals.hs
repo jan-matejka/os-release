@@ -22,7 +22,7 @@ val (Var  _) = error "Not a val"
 val (Val  x) = x
 val (QVal x) = x
 
-data Reals = Gentoo | OpenSUSEFactory
+data Reals = Gentoo | OpenSUSEFactory | Fedora20
 
 testVals :: Reals -> [(TestVal, TestVal)]
 testVals Gentoo =
@@ -46,6 +46,23 @@ testVals OpenSUSEFactory =
     , (Var "HOME_URL"       , QVal "https://opensuse.org/")
     , (Var "ID_LIKE"        , QVal "suse")
     ]
+
+testVals Fedora20 =
+    [ (Var "NAME"                           , Val "Fedora")
+    , (Var "VERSION"                        , QVal "20 (Heisenbug)")
+    , (Var "ID"                             , Val "fedora")
+    , (Var "VERSION_ID"                     , Val "20")
+    , (Var "PRETTY_NAME"                    , QVal "Fedora 20 (Heisenbug)")
+    , (Var "ANSI_COLOR"                     , QVal "0;34")
+    , (Var "CPE_NAME"                       , QVal "cpe:/o:fedoraproject:fedora:20")
+    , (Var "HOME_URL"                       , QVal "https://fedoraproject.org/")
+    , (Var "BUG_REPORT_URL"                 , QVal "https://bugzilla.redhat.com/")
+    , (Var "REDHAT_BUGZILLA_PRODUCT"        , QVal "Fedora")
+    , (Var "REDHAT_BUGZILLA_PRODUCT_VERSION", Val "20")
+    , (Var "REDHAT_SUPPORT_PRODUCT"         , QVal "Fedora")
+    , (Var "REDHAT_SUPPORT_PRODUCT_VERSION" , Val "20")
+    ]
+
 
 input :: Reals -> String
 input x = unlines [toInput x' <> "=" <> toInput y | (x',y) <- testVals x]
