@@ -5,6 +5,7 @@ import           Test.Hspec
 import           System.OsRelease
 import           Data.Map.Lazy
 import           Data.Monoid
+import           OsReleaseSpec.Reals
 
 spec :: Spec
 spec = do
@@ -41,6 +42,9 @@ spec = do
         it "breaks on unquoted val with space"  $ errCase "foo=ba r"
         it "breaks on unquoted val with ;"      $ errCase "foo=ba;r"
         it "breaks on unquoted val with \\"     $ errCase "foo=ba\\r"
+
+        it "parses Gentoo os-release" $
+            parseCase (input Gentoo) (output Gentoo)
 
     where
         fooBar x = parseCase x [("foo", "bar")]
