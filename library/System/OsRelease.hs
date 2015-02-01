@@ -3,6 +3,7 @@
 module System.OsRelease
     ( parseOs
     , readOs
+    , readOs'
     , OsReleaseValue (..)
     , OsReleaseKey (..)
     , OsReleaseLine
@@ -16,8 +17,10 @@ import Data.Map.Lazy hiding (foldl)
 import Data.Functor.Identity
 import Data.String
 import Data.Monoid
+import Data.Either
 import Control.Applicative ((<$>))
 import Control.Monad
+import qualified Control.Exception as E
 
 type OsReleaseLine  = (OsReleaseKey, OsReleaseValue)
 newtype OsReleaseKey   = OsReleaseKey String
@@ -78,10 +81,27 @@ instance Parsable OsRelease where
     parser = fromList <$> (sepEndBy (parser :: ParsecT String () Identity OsReleaseLine) newline)
 
 
-readOs :: IO (Either ParseError OsRelease)
+readOs :: IO (Either OsReleaseError OsRelease)
 readOs = do
-    xs <- readFile "/etc/os-release"
-    return $ parseOs xs
+    xs <- readOs' ["/etc/os-release", "/usr/lib/os-release"]
+    case xs of
+        Left  e -> return $ Left e
+        Right x -> return . h $ parseOs x
+  where
+    h (Left  e) = Left $ OsReleaseParseError e
+    h (Right x) = Right x
+
+data OsReleaseError = OsReleaseError String
+                    | OsReleaseParseError ParseError
+    deriving (Show)
+
+readOs' :: [FilePath] -> IO (Either OsReleaseError String)
+readOs' fs = do
+    xs <- mapM (E.try . readFile) fs :: IO [Either E.IOException String]
+    return . h $ rights xs
+  where
+    h [] = Left . OsReleaseError $ "Neither of " <> unwords fs <> " could be read"
+    h (x:_) = Right x
 
 parseOs :: String -> Either ParseError OsRelease
 parseOs xs = parse (parser :: ParsecT String () Identity OsRelease) "os-release" xs

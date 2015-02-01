@@ -6,6 +6,8 @@ import           System.OsRelease
 import           Data.Map.Lazy
 import           Data.Monoid
 import           OsReleaseSpec.Reals
+import           System.IO.Temp
+import           System.IO
 
 spec :: Spec
 spec = do
@@ -47,6 +49,29 @@ spec = do
 
         it "parses Gentoo os-release"           $ realCase Gentoo
         it "parses OpenSUSE Factory os-release" $ realCase OpenSUSEFactory
+
+    describe "readOs'" $ do
+        it "reads 1st" $ do
+            withSystemTempFile "1st.txt" $ \f1 hf1 -> do
+                withSystemTempFile "2nd.txt" $ \f2 hf2 -> do
+                    hPutStr hf1 "1"
+                    hPutStr hf2 "2"
+                    mapM_ hClose [hf1, hf2]
+
+                    xs <- readOs' [f1, f2]
+                    case xs of
+                        Right x -> x `shouldBe` "1"
+                        Left e -> expectationFailure $ show e
+
+        it "reads 2nd" $ do
+            withSystemTempFile "a-file.txt" $ \f h -> do
+                hPutStr h "1"
+                hClose h
+
+                xs <- readOs' ["/oh-well-let's-hope-no-one-makes-this-file", f]
+                case xs of
+                    Right x -> x `shouldBe` "1"
+                    Left e -> expectationFailure $ show e
 
     where
         fooBar x = parseCase x [("foo", "bar")]
