@@ -9,7 +9,7 @@ maintainer:     <yac@blesmrt.net>
 homepage:       https://github.com/yaccz/os-release
 name:           os-release
 synopsis:       /etc/os-release helpers
-version:        0.1.0
+version:        0.2.0
 description:    /etc/os-release helpers
 
 
