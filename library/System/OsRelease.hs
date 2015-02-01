@@ -3,6 +3,7 @@
 module System.OsRelease
     ( parseOs
     , readOs
+    , OsReleaseValue (..)
     )
 where
 

@@ -4,6 +4,7 @@ module OsReleaseSpec (spec) where
 import           Test.Hspec
 import           System.OsRelease
 import           Data.Map.Lazy
+import           Data.Monoid
 
 spec :: Spec
 spec = do
@@ -12,15 +13,37 @@ spec = do
         it "parses simple value with trailing NL"  $ fooBar "foo=bar\n"
         it "parses single quoted value"            $ fooBar "foo='bar'"
         it "parses double quoted value"            $ fooBar "foo=\"bar\""
+
+        it "parses special \\"  $ specialFooBar "foo='ba\\\\r'" "\\"
+        it "parses special `"  $ specialFooBar "foo='ba\\`r'" "`"
+        it "parses special '"  $ specialFooBar "foo='ba\\'r'" "'"
+        it "parses special $"  $ specialFooBar "foo='ba\\$r'" "$"
+        it "parses special \""  $ specialFooBar "foo=\"ba\\\"r\"" "\""
+
         it "parses multiple values" $ parseCase
             "foo=bar\nqux=quux"
             [("foo", "bar"), ("qux", "quux")]
 
+        it "parses empty val noquotes" $ parseCase "foo=" [("foo", "")]
+        it "parses empty val quote \"" $ parseCase "foo=\"\"" [("foo", "")]
+        it "parses empty val quote '"  $ parseCase "foo=''" [("foo", "")]
+
         it "breaks on misquoting 1" $ errCase "foo=\"bar'"
         it "breaks on misquoting 2" $ errCase "foo='bar\""
+        it "breaks on unquoted $"   $ errCase "foo='ba$r'"
+        it "breaks on unquoted `"   $ errCase "foo='ba`r'"
+        it "breaks on unquoted \""  $ errCase "foo=\"ba\"r\""
+        it "breaks on unquoted '"   $ errCase "foo='ba'r'"
+        it "breaks on unquoted \\"  $ errCase "foo='ba\\r'"
+        it "breaks on unquoted val with space"  $ errCase "foo=ba r"
+        it "breaks on unquoted val with ;"      $ errCase "foo=ba;r"
+        it "breaks on unquoted val with \\"     $ errCase "foo=ba\\r"
 
     where
         fooBar x = parseCase x [("foo", "bar")]
+
+        specialFooBar :: String -> String -> Expectation
+        specialFooBar x y = parseCase x [("foo", OsReleaseValue $ "ba" <> y <> "r")]
 
         parseCase x y =
             case parseOs x of
