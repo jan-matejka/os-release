@@ -32,7 +32,7 @@ class Parsable a where
     parser :: ParsecT String () Identity a
 
 instance Parsable OsReleaseKey where
-    parser = OsReleaseKey <$> many1 alphaNum
+    parser = OsReleaseKey <$> many1 (alphaNum <|> char '_')
 
 instance Parsable OsReleaseValue where
     parser = OsReleaseValue <$> (qVal <|> nqVal)
