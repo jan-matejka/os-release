@@ -14,6 +14,9 @@ spec = do
         it "parses single quoted value"            $ fooBar "foo='bar'"
         it "parses double quoted value"            $ fooBar "foo=\"bar\""
 
+        it "parses quoted space" $ parseCase "f='a b'" [("f", "a b")]
+        it "parses quoted -" $ parseCase "f='a-b'" [("f", "a-b")]
+
         it "parses special \\"  $ specialFooBar "foo='ba\\\\r'" "\\"
         it "parses special `"  $ specialFooBar "foo='ba\\`r'" "`"
         it "parses special '"  $ specialFooBar "foo='ba\\'r'" "'"

@@ -47,7 +47,7 @@ instance Parsable OsReleaseValue where
         noJunk = try . lookAhead $ eof <|> (void newline)
 
         qValInside :: Char -> ParsecT String () Identity String
-        qValInside quote = (qSpecial quote) <|> (:[]) <$> alphaNum
+        qValInside quote = (qSpecial quote) <|> (:[]) <$> (noneOf $ specials quote)
 
         qSpecial :: Char -> ParsecT String () Identity String
         qSpecial quote = (\x -> [x!!1]) <$>
