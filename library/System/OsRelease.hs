@@ -4,6 +4,9 @@ module System.OsRelease
     ( parseOs
     , readOs
     , OsReleaseValue (..)
+    , OsReleaseKey (..)
+    , OsReleaseLine
+    , OsRelease
     )
 where
 
