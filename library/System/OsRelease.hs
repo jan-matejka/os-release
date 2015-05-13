@@ -8,6 +8,7 @@ module System.OsRelease
     , OsReleaseKey (..)
     , OsReleaseLine
     , OsRelease
+    , OsReleaseError
     )
 where
 
