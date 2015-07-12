@@ -47,7 +47,6 @@ test-suite tests
         Haskell2010
     ghc-options:
         -Wall
-        -Werror
     hs-source-dirs:
         library
         tests/unit
