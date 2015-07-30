@@ -7,6 +7,7 @@ arguments :: [String]
 arguments =
     [
       "library"
+    , "--cpp-file=dist/build/autogen/cabal_macros.h"
     , "tests"
     ]
 

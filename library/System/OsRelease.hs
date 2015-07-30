@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleContexts, TypeSynonymInstances, FlexibleInstances, GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE FlexibleContexts, TypeSynonymInstances, FlexibleInstances, GeneralizedNewtypeDeriving, CPP #-}
 
 module System.OsRelease
     ( parseOs
@@ -19,7 +19,13 @@ import Data.Functor.Identity
 import Data.String
 import Data.Monoid
 import Data.Either
+
+#if MIN_VERSION_base(4,8,0)
+-- note: using hscpp it should be possible to use `#if not COND`
+#else
 import Control.Applicative ((<$>))
+#endif
+
 import Control.Monad
 import qualified Control.Exception as E
 
