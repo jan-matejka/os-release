@@ -12,6 +12,10 @@ synopsis:       /etc/os-release helpers
 version:        0.2.1
 description:    /etc/os-release helpers
 
+Flag devel
+  Description:  Enables -Werror
+  Default:      False
+  Manual:       True
 
 source-repository head
   type:     git
@@ -45,9 +49,11 @@ test-suite tests
       , temporary
     default-language:
         Haskell2010
-    ghc-options:
-        -Wall
-        -Werror
+
+    if flag(devel)
+       ghc-options: -Wall -Werror
+    else
+       ghc-options: -Wall
     hs-source-dirs:
         library
         tests/unit
