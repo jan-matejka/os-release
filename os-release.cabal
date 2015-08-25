@@ -11,7 +11,7 @@ name:           os-release
 synopsis:       /etc/os-release helpers
 version:        0.2.1
 description:    /etc/os-release helpers
-extra-doc-files: README.rst
+extra-doc-files: ChangeLog.rst README.rst
 
 Flag devel
   Description:  Enables -Werror
