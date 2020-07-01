@@ -1,3 +1,8 @@
+1.0.0
+=====
+
+- Redo of the entire API
+
 0.2.2
 =====
 
