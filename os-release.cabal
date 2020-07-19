@@ -9,7 +9,7 @@ maintainer:         Julian Ospald <hasufell@posteo.de>
 homepage:           https://github.com/yaccz/os-release
 name:               os-release
 synopsis:           /etc/os-release helpers
-version:            1.0.0
+version:            1.0.1
 description:
   \/etc\/os-release helpers as per the freedesktop spec: https://www.freedesktop.org/software/systemd/man/os-release.html
 
