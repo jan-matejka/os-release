@@ -139,7 +139,7 @@ defaultAssignments =
 -- file contents.
 getAllAssignments :: String  -- ^ file contents of os-release
                   -> [Either (MP.ParseError String Void) (String, String)]
-getAllAssignments = fromRight [] . MP.parse parseAssignments "os-release"
+getAllAssignments = either (const []) (\x -> x) . MP.parse parseAssignments "os-release"
 
 
 -- | Parse the assignments into `OsRelease`. This is merged with the

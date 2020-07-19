@@ -29,7 +29,7 @@ source-repository head
   location: https://github.com/yaccz/os-release.git
 
 common base
-  build-depends: base >=4.11 && <5
+  build-depends: base >=4.9 && <5
 
 common bytestring
   build-depends: bytestring
@@ -44,10 +44,10 @@ common hspec
   build-depends: hspec >=2.7.1
 
 common hspec-megaparsec
-  build-depends: hspec-megaparsec >=2.1.0
+  build-depends: hspec-megaparsec >=1.1.0
 
 common megaparsec
-  build-depends: megaparsec >=8.0.0
+  build-depends: megaparsec >=7.0.5
 
 common pretty-simple
   build-depends: pretty-simple >=1.0.0.0
