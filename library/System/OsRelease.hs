@@ -86,6 +86,7 @@ data OsRelease = OsRelease {
   , logo :: !(Maybe String)
 } deriving (Generic, Show)
 
+deriveJSON defaultOptions ''OsRelease
 
 class GetRecords a where
   getRecords :: a -> [String]
@@ -188,5 +189,3 @@ parseOsRelease' s =
             $ (init . getRecords . from $ defaultOsRelease)
   in  OsReleaseResult osr unknown_fields' errs
 
-
-deriveJSON defaultOptions ''OsRelease
