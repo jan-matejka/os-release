@@ -1,3 +1,8 @@
+1.0.2.1
+=======
+
+- Allow to build with aeson >= 2
+
 1.0.2
 =====
 
