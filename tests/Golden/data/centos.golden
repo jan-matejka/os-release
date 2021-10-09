@@ -21,16 +21,12 @@ OsReleaseResult
         }
     , unknown_fields =
         [
-            ( "REDHAT_SUPPORT_PRODUCT_VERSION"
-            , "8"
+            ( "REDHAT_SUPPORT_PRODUCT"
+            , "centos"
             )
         ,
             ( "CENTOS_MANTISBT_PROJECT"
             , "CentOS-8"
-            )
-        ,
-            ( "REDHAT_SUPPORT_PRODUCT"
-            , "centos"
             )
         ,
             ( "PLATFORM_ID"
@@ -38,6 +34,10 @@ OsReleaseResult
             )
         ,
             ( "CENTOS_MANTISBT_PROJECT_VERSION"
+            , "8"
+            )
+        ,
+            ( "REDHAT_SUPPORT_PRODUCT_VERSION"
             , "8"
             )
         ]
