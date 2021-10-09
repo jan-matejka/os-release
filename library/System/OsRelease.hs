@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE CPP #-}
 
 -- | A module to retrieve os-release information according to the
 -- freedesktop standard:
@@ -42,6 +43,9 @@ import           Control.Applicative
 import           Control.Monad
 import           Control.Exception.Safe
 import           Data.Aeson
+#if MIN_VERSION_aeson(2,0,0)
+import           Data.Aeson.KeyMap ( fromHashMap )
+#endif
 import           Data.Aeson.TH
 import           Data.Char
 import           Data.Either
@@ -52,6 +56,9 @@ import           GHC.Generics
 import           Prelude                 hiding ( id
                                                 )
 
+#if MIN_VERSION_aeson(2,0,0)
+import qualified Data.Aeson.Key                as AK
+#endif
 import qualified Data.HashMap.Strict           as HM
 import qualified Data.Text                     as T
 import qualified Text.Megaparsec               as MP
@@ -155,6 +162,10 @@ getOsRelease =
     )
     . fromJSON
     . Object
+#if MIN_VERSION_aeson(2,0,0)
+    . fromHashMap
+    . HM.mapKeys AK.fromText
+#endif
     . (\x -> HM.union x (HM.fromList . aesonify $ defaultAssignments))
     . HM.fromList
     . aesonify
