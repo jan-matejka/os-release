@@ -1,0 +1,29 @@
+OsReleaseResult
+    { osRelease = OsRelease
+        { name = "openSUSE Tumbleweed"
+        , version = Just "20240823"
+        , id = "opensuse-tumbleweed"
+        , id_like = Just "opensuse suse"
+        , version_codename = Nothing
+        , version_id = Just "20240823"
+        , pretty_name = "openSUSE Tumbleweed"
+        , ansi_color = Just "0;32"
+        , cpe_name = Just "cpe:2.3:o:opensuse:tumbleweed:20240823:*:*:*:*:*:*:*"
+        , home_url = Just "https://www.opensuse.org"
+        , documentation_url = Just "https://en.opensuse.org/Portal:Tumbleweed"
+        , support_url = Just "https://bugs.opensuse.org"
+        , bug_report_url = Just "https://bugzilla.opensuse.org"
+        , privacy_policy_url = Nothing
+        , build_id = Nothing
+        , variant = Nothing
+        , variant_id = Nothing
+        , logo = Just "distributor-logo-Tumbleweed"
+        }
+    , unknown_fields =
+        [
+            ( "LOGO"
+            , "distributor-logo-Tumbleweed"
+            )
+        ]
+    , parse_errors = []
+    }
