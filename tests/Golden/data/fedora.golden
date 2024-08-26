@@ -21,28 +21,28 @@ OsReleaseResult
         }
     , unknown_fields =
         [
-            ( "REDHAT_SUPPORT_PRODUCT"
-            , "Fedora"
+            ( "LOGO"
+            , "fedora-logo-icon"
+            )
+        ,
+            ( "REDHAT_BUGZILLA_PRODUCT_VERSION"
+            , "31"
             )
         ,
             ( "PLATFORM_ID"
             , "platform:f31"
             )
         ,
-            ( "LOGO"
-            , "fedora-logo-icon"
-            )
-        ,
             ( "REDHAT_SUPPORT_PRODUCT_VERSION"
             , "31"
             )
         ,
-            ( "REDHAT_BUGZILLA_PRODUCT"
+            ( "REDHAT_SUPPORT_PRODUCT"
             , "Fedora"
             )
         ,
-            ( "REDHAT_BUGZILLA_PRODUCT_VERSION"
-            , "31"
+            ( "REDHAT_BUGZILLA_PRODUCT"
+            , "Fedora"
             )
         ]
     , parse_errors = []

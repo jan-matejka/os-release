@@ -21,14 +21,6 @@ OsReleaseResult
         }
     , unknown_fields =
         [
-            ( "REDHAT_SUPPORT_PRODUCT"
-            , "centos"
-            )
-        ,
-            ( "CENTOS_MANTISBT_PROJECT"
-            , "CentOS-8"
-            )
-        ,
             ( "PLATFORM_ID"
             , "platform:el8"
             )
@@ -37,8 +29,16 @@ OsReleaseResult
             , "8"
             )
         ,
+            ( "CENTOS_MANTISBT_PROJECT"
+            , "CentOS-8"
+            )
+        ,
             ( "REDHAT_SUPPORT_PRODUCT_VERSION"
             , "8"
+            )
+        ,
+            ( "REDHAT_SUPPORT_PRODUCT"
+            , "centos"
             )
         ]
     , parse_errors = []

@@ -21,20 +21,20 @@ OsReleaseResult
         }
     , unknown_fields =
         [
-            ( "REDHAT_SUPPORT_PRODUCT"
-            , "Red Hat Enterprise Linux"
+            ( "REDHAT_BUGZILLA_PRODUCT_VERSION"
+            , "7.6"
             )
         ,
             ( "REDHAT_SUPPORT_PRODUCT_VERSION"
             , "7.6"
             )
         ,
-            ( "REDHAT_BUGZILLA_PRODUCT"
-            , "Red Hat Enterprise Linux 7"
+            ( "REDHAT_SUPPORT_PRODUCT"
+            , "Red Hat Enterprise Linux"
             )
         ,
-            ( "REDHAT_BUGZILLA_PRODUCT_VERSION"
-            , "7.6"
+            ( "REDHAT_BUGZILLA_PRODUCT"
+            , "Red Hat Enterprise Linux 7"
             )
         ]
     , parse_errors = []
